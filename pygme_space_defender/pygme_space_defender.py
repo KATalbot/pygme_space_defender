@@ -7,18 +7,27 @@ def main():
 
     pygame.display.set_caption('Defender')
 
-    height = pygame.display.Info().current_h
+    height = pygame.display.Info().current_h 
+ 
     width = pygame.display.Info().current_w
+
+    FPS = 30 
+
     clock = pygame.time.Clock()
 
     slow_star_field = []
     med_star_field = []
     fast_star_field = []
 
+    stars_fall_too = 500
+     
+
+
     for slow_star in range(50): 
         star_loc_x = random.randrange(0, width)
         star_loc_y = random.randrange(0, height)
         slow_star_field.append([star_loc_x, star_loc_y])
+
 
     for med_star in range(35): 
         star_loc_x = random.randrange(0, width)
@@ -55,35 +64,38 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            if event.type == pygame.KEYDOWN and pygame.K_ESCAPE:
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 running = False
 
         screen.fill(BLACK)
 
         for star in slow_star_field:
             star[1] += 1
-            if star[1] > height:
+            if star[1] > stars_fall_too:
                 star[0] = random.randrange(0, width)
                 star[1] = random.randrange(-20, -5)
             pygame.draw.circle(screen, DARKGREY, star, 3)
 
         for star in med_star_field:
             star[1] += 4
-            if star[1] > height:
+            if star[1] > stars_fall_too:
                 star[0] = random.randrange(0, width)
                 star[1] = random.randrange(-20, -5)
             pygame.draw.circle(screen, LIGHTGREY, star, 2)
 
         for star in fast_star_field:
             star[1] += 8
-            if star[1] > height:
+            if star[1] > stars_fall_too:
                 star[0] = random.randrange(0, width)
                 star[1] = random.randrange(-20, -5)
             pygame.draw.circle(screen, YELLOW, star, 1)
+
+        
+        pygame.draw.line(screen,GREEN,(0,500),(1500,500),4)
         
         pygame.display.update()
 
-        clock.tick(30)
+        clock.tick(FPS)
 
     pygame.quit()
 
