@@ -1,4 +1,5 @@
 import pygame
+import random
 
 def main():
 
@@ -6,13 +7,26 @@ def main():
 
     height = pygame.display.Info().current_h
     width = pygame.display.Info().current_w
+    clock = pygame.time.Clock()
 
-    star_field_slow = []
+    slow_star_field = []
+    med_star_field = []
+    fast_star_field = []
 
-    for slow_stars in range(50): 
+    for slow_star in range(50): 
         star_loc_x = random.randrange(0, width)
         star_loc_y = random.randrange(0, height)
-        star_field_slow.append([star_loc_x, star_loc_y])
+        slow_star_field.append([star_loc_x, star_loc_y])
+
+    for med_star in range(35): 
+        star_loc_x = random.randrange(0, width)
+        star_loc_y = random.randrange(0, height)
+        med_star_field.append([star_loc_x, star_loc_y])
+
+    for fast_star in range(15): 
+        star_loc_x = random.randrange(0, width)
+        star_loc_y = random.randrange(0, height)
+        fast_star_field.append([star_loc_x, star_loc_y])
 
 
     WHITE = (255, 255, 255)
@@ -43,8 +57,31 @@ def main():
                 running = False
 
         screen.fill(BLACK)
-       
+
+        for star in slow_star_field:
+            star[1] += 1
+            if star[1] > height:
+                star[0] = random.randrange(0, width)
+                star[1] = random.randrange(-20, -5)
+            pygame.draw.circle(screen, DARKGREY, star, 3)
+
+        for star in med_star_field:
+            star[1] += 4
+            if star[1] > height:
+                star[0] = random.randrange(0, width)
+                star[1] = random.randrange(-20, -5)
+            pygame.draw.circle(screen, LIGHTGREY, star, 2)
+
+        for star in fast_star_field:
+            star[1] += 8
+            if star[1] > height:
+                star[0] = random.randrange(0, width)
+                star[1] = random.randrange(-20, -5)
+            pygame.draw.circle(screen, YELLOW, star, 1)
+        
         pygame.display.update()
+
+        clock.tick(30)
 
     pygame.quit()
 
