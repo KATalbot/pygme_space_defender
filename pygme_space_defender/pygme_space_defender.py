@@ -15,13 +15,15 @@ def main():
 
     clock = pygame.time.Clock()
 
+    # Random star generation
     slow_star_field = []
     med_star_field = []
     fast_star_field = []
 
+    # How far stars should fall too
     stars_fall_too = 500
-     
-
+    
+    # Make some stars
 
     for slow_star in range(50): 
         star_loc_x = random.randrange(0, width)
@@ -39,6 +41,7 @@ def main():
         star_loc_y = random.randrange(0, height)
         fast_star_field.append([star_loc_x, star_loc_y])
 
+    # Make some colors
 
     WHITE = (255, 255, 255)
     LIGHTGREY = (192, 192, 192)
@@ -52,8 +55,6 @@ def main():
     CYAN = (0, 255, 255)
 
     pygame.init()
-
-    
 
     #game loop
 
