@@ -3,6 +3,10 @@ import random
 
 def main():
 
+    #init pygame
+
+    pygame.init()
+
     screen = pygame.display.set_mode((1500,600))
 
     pygame.display.set_caption('Defender')
@@ -54,9 +58,17 @@ def main():
     MAGENTA = (255, 0, 255)
     CYAN = (0, 255, 255)
 
-    #init pygame
+    # lets set up the score
+    score_value = 0
+    font = pygame.font.Font('freesansbold.ttf',32)
+    textX=10
+    textY=525
 
-    pygame.init()
+    def show_score(x,y):
+        score = font.render("Score : " + str(score_value), True, (255,255,255))
+        screen.blit(score,(x, y))
+
+
 
     #game loop
 
@@ -95,6 +107,9 @@ def main():
 
         
         pygame.draw.line(screen,GREEN,(0,500),(1500,500),4)
+
+        # Show Score
+        show_score(textX,textY)   
         
         pygame.display.update()
 
