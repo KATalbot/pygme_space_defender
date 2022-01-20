@@ -3,7 +3,9 @@ import random
 
 def main():
 
-    screen = pygame.display.set_mode((1024,768))
+    screen = pygame.display.set_mode((1500,600))
+
+    pygame.display.set_caption('Defender')
 
     height = pygame.display.Info().current_h
     width = pygame.display.Info().current_w
