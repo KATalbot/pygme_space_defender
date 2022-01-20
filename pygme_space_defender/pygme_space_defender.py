@@ -54,6 +54,8 @@ def main():
     MAGENTA = (255, 0, 255)
     CYAN = (0, 255, 255)
 
+    #init pygame
+
     pygame.init()
 
     #game loop
