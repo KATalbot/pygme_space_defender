@@ -64,6 +64,12 @@ def main():
     textX=10
     textY=525
 
+    # Load the ship
+    # TODO: this is broken
+    playerImg = pygame.image.load('ship.png').convert()
+    playerImg.set_colorkey(BLACK)
+
+
     def show_score(x,y):
         score = font.render("Score : " + str(score_value), True, (255,255,255))
         screen.blit(score,(x, y))
@@ -110,6 +116,10 @@ def main():
 
         # Show Score
         show_score(textX,textY)   
+
+        # Display player
+        screen.blit(playerImg,(round(10), round(200)))
+
         
         pygame.display.update()
 
