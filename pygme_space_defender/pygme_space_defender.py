@@ -15,7 +15,7 @@ def main():
  
     width = pygame.display.Info().current_w
 
-    FPS = 30 
+    FPS = 30
 
     clock = pygame.time.Clock()
 
@@ -64,15 +64,28 @@ def main():
     textX=10
     textY=525
 
-    # Load the ship
-    # TODO: this is broken
-    playerImg = pygame.image.load('ship.png').convert()
-    playerImg.set_colorkey(BLACK)
+    # Load the ship sheet
+    
+    playerImg_sheet = pygame.image.load('ship.png').convert_alpha()
+
+    # function to pull images from the sprite sheet
+    # todo: this should be its own class/import .py file
+
+    def get_image(sheet, frame, width, height, scale, color):
+        image = pygame.Surface((width,height)).convert_alpha()
+        image.blit(sheet,(0,0),((frame * width),0,width,height))
+        image = pygame.transform.scale(image, (width * scale, height * scale))
+        image.set_colorkey(color)
+
+        return image
 
 
     def show_score(x,y):
         score = font.render("Score : " + str(score_value), True, (255,255,255))
         screen.blit(score,(x, y))
+
+    space_ship_frame_0 = get_image(playerImg_sheet, 0, 60,24,1,BLACK)
+    space_ship_frame_1 = get_image(playerImg_sheet, 1, 60,24,1,BLACK)
 
 
 
@@ -117,8 +130,10 @@ def main():
         # Show Score
         show_score(textX,textY)   
 
-        # Display player
-        screen.blit(playerImg,(round(10), round(200)))
+        # Display player different frames
+        # todo: need to create a way for switching images/frames to create animation
+        screen.blit(space_ship_frame_0, (0,0))
+        screen.blit(space_ship_frame_1, (100,0))
 
         
         pygame.display.update()
